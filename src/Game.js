@@ -3,15 +3,15 @@ import './Game.css';
 import history from "./history";
 
 const Game = ({id, name, platform, genre, releaseDate, numOfPlayers, publisher, boxArt, setGames}) => {
-    const [show, setSearch] = useState(1);
+    const [show, setShow] = useState(1);
     const [remove, showRemove] = useState(1);
     return (
         <div className="box" onClick={() => {
             if (remove === 1) {
-                setSearch(1);
+                setShow(1);
                 showRemove(0);
             } else {
-                setSearch(0);
+                setShow(1);
                 showRemove(1);
             }
 
