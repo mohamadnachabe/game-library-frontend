@@ -26,41 +26,71 @@ const AddGame = () =>  {
                 </h1>
             </header>
             <body className='box2'>
-                <form className ='form'>
-                    <p htmlFor="name">Name</p>
-                    <input id="name" name="name" type="text" onChange={(e) => {
-                        setName(e.target.value)
-                    }}/>
+                <form>
 
-                    <p htmlFor="platform">Platform</p>
-                    <input id="platform" name="platform" type="text" onChange={(e) => {
-                        setPlatform(e.target.value)
-                    }} />
+                    <div className ='form'>
+                        <p htmlFor="name">Name</p>
+                        <input id="name" name="name" type="text" onChange={(e) => {
+                            setName(e.target.value)
+                        }}/>
+                    </div>
 
-                    <p htmlFor="genre">Genre</p>
-                    <input id="genre" name="genre" type="text" onChange={(e) => {
-                        setGenre(e.target.value)
-                    }}/>
+                    <div className ='form'>
+                        <p htmlFor="platform">Platform (PS1, PS2, PS3 or PS4)</p>
+                        <input type="text" id="platform" onChange={(e) => {
+                            setPlatform(e.target.value)
+                        }}/>
+                        {/*<select id="ddlViewBy" onChange={(e) => {*/}
+                        {/*    setPlatform(e.target.value)*/}
+                        {/*}}>*/}
+                        {/*    <option value="1">PS1</option>*/}
+                        {/*    <option value="2" selected="selected">PS2</option>*/}
+                        {/*    <option value="3">PS3</option>*/}
+                        {/*    <option value="3">PS4</option>*/}
+                        {/*</select>*/}
+                        {/*<input id="platform" name="platform" type="text" onChange={(e) => {*/}
+                        {/*    setPlatform(e.target.value)*/}
+                        {/*}} />*/}
+                    </div>
 
-                    <p htmlFor="releaseDate">Release date</p>
-                    <input id="releaseDate" name="releaseDate" type="text" onChange={(e) => {
-                        setReleaseDate(e.target.value)
-                    }}/>
+                    <div className ='form'>
+                        <p htmlFor="genre">Genre</p>
+                        <input id="genre" name="genre" type="text" onChange={(e) => {
+                            setGenre(e.target.value)
+                        }}/>
+                    </div>
 
-                    <p htmlFor="numOfPlayers">Num of Players</p>
-                    <input id="numOfPlayers" name="numOfPlayers" type="text" onChange={(e) => {
-                        setNumOfPlayers(e.target.value)
-                    }}/>
+                    <div className ='form'>
+                        <p htmlFor="releaseDate">Release date (yyyy-mm-dd)</p>
+                        <input type="date" id="start" onChange={(e) => {
+                            setReleaseDate(e.target.value)
+                        }}/>
+                        {/*<input id="releaseDate" name="releaseDate" type="text" onChange={(e) => {*/}
+                        {/*    setReleaseDate(e.target.value)*/}
+                        {/*}}/>*/}
+                    </div>
 
-                    <p htmlFor="publisher">Publisher</p>
-                    <input id="publisher" name="publisher" type="text" onChange={(e) => {
-                        setPublisher(e.target.value)
-                    }}/>
+                    <div className ='form'>
+                        <p htmlFor="numOfPlayers">Num of Players</p>
+                        <input id="numOfPlayers" name="numOfPlayers" type="text" onChange={(e) => {
+                            setNumOfPlayers(e.target.value)
+                        }}/>
+                    </div>
 
-                    <p htmlFor="boxArt">Box Art</p>
-                    <input id="boxArt" name="boxArt" type="text" onChange={(e) => {
-                        setBoxArt(e.target.value)
-                    }}/>
+                    <div className ='form'>
+                        <p htmlFor="publisher">Publisher</p>
+                        <input id="publisher" name="publisher" type="text" onChange={(e) => {
+                            setPublisher(e.target.value)
+                        }}/>
+                    </div>
+
+
+                    <div className ='form'>
+                        <p htmlFor="boxArt">Box Art (image url)</p>
+                        <input id="boxArt" name="boxArt" type="text" onChange={(e) => {
+                            setBoxArt(e.target.value)
+                        }}/>
+                    </div>
 
                     <button className="search-button" type="button" onClick={(e) => {
                         console.log({name}.name);
@@ -88,7 +118,15 @@ const AddGame = () =>  {
                                 "numOfPlayers": {numOfPlayers}.numOfPlayers,
                                 "boxArt": {boxArt}.boxArt
                             })
-                        });
+                        }).then(
+                            function(response) {
+                                if (response.status !== 200) {
+                                    console.log('Looks like there was a problem. Status Code: ' +
+                                        response.status);
+                                    window.alert('No game was added')
+                                }
+                            }
+                        );
                         history.push('/')
                     }}>
                         Add Game

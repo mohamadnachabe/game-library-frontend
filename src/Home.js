@@ -1,5 +1,4 @@
-import React, {Component, useEffect, useState} from "react";
-import { Button } from 'react-bootstrap';
+import React, {useEffect, useState} from "react";
 import history from './history';
 import "./Home.css";
 import logo from "./playstation-retro.png";
@@ -15,7 +14,7 @@ const Home = () =>  {
 
     useEffect( () => {
         getGames();
-    }, [search, games]);
+    }, [search]);
 
     const getGames = async () => {
         (fetch(`http://35.246.77.193:8080/games?game=${search}`, {
@@ -32,7 +31,7 @@ const Home = () =>  {
                 // Examine the text in the response
                 response.json().then(function(data) {
                     console.log(data);
-                    setGames(data)
+                    setGames(data);
                 });
             }
         ));
@@ -58,22 +57,27 @@ const Home = () =>  {
                         Add Game
                     </button>
                 </form>
+                <p>Press on box to delete game</p>
             </header>
-            <body>
             <div className="game">
                 {games.map(game => (
                     <Game
                         key = {game.id}
+                        id = {game.id}
                         name = {game.name}
                         platform={game.platform}
                         genre={game.genre}
                         releaseDate={game.releaseDate}
                         numOfPlayers={game.numOfPlayers}
                         publisher={game.publisher}
-                        boxArt = {game.boxArt}/>
+                        boxArt = {game.boxArt}
+                        setGames = {setGames}/>
                 ))};
             </div>
-            </body>
+            <div className="App-header">
+                <p>mohamadnachabe@gmail.com</p>
+                <a className="App-link" href="https://github.com/mohamadnachabe">Github</a>
+            </div>
         </div>
     );
 };
